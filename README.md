@@ -1,6 +1,5 @@
 # 🚀 Drive Clone - Your Personal Cloud Storage
 
-![Drive Clone](https://source.unsplash.com/1600x500/?cloud,technology)
 
 ## 📖 About the Project  
 **Drive Clone** is a **cloud-based file storage system** built with **MongoDB, Express.js, Node.js, HTML, and Tailwind CSS**. It allows users to:  
@@ -16,7 +15,7 @@
 - **Backend:** Node.js, Express.js  
 - **Database:** MongoDB  
 - **Authentication:** JSON Web Token (JWT)  
-- **Storage:** Cloud storage for file uploads  
+- **Storage:** Cloud storage for file uploads (Cloudinary platform)
 
 ---
 
@@ -32,11 +31,11 @@
 ## 📂 Project Structure  
 ```bash
 📦 Drive-Clone
- ┣ 📂 server/          # Backend API (Node.js + Express.js)
+ ┣ 📂 config/          # Configuratiions
  ┣ 📂 public/          # Frontend (HTML + Tailwind CSS)
  ┣ 📂 models/          # Database Schemas (MongoDB)
  ┣ 📂 routes/          # API Routes
  ┣ 📜 .gitignore       # Ignore unnecessary files
  ┣ 📜 package.json     # Dependencies
  ┣ 📜 README.md        # Documentation
- ┗ 📜 server.js        # Main Server File
+ ┗ 📜 app.js        # Main Server File
