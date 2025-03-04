@@ -1,0 +1,148 @@
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #824395, #8130e5a3, #3b98f4d0, #31d2b5);
+  background-size: 400% 400%;
+  animation: gradientBG 8s infinite alternate ease-in-out;
+}
+
+/* Background gradient animation */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+main {
+  width: 100%;
+  max-width: 550px; /* Increased box size */
+}
+
+.main-content {
+  background: #fff;
+  padding: 40px; /* Increased padding */
+  height: 500px; /* Increased height */
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  position: relative;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Fade-in effect */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+  font-size: 20px; /* Bigger labels */
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 15px; /* Bigger input fields */
+  margin-bottom: 25px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 20px; /* Increased font size */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #6e8efb;
+  outline: none;
+  box-shadow: 0 0 10px rgba(110, 142, 251, 0.5);
+}
+
+/* Login Button */
+button[type="submit"] {
+  width: 100%;
+  padding: 15px; /* Bigger button */
+  background: #6e8efb;
+  border: none;
+  border-radius: 8px;
+  font-size: 22px; /* Increased button font size */
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+button[type="submit"]:hover {
+  background: #575fcf;
+  transform: scale(1.05);
+}
+
+/* Login text */
+p {
+  text-align: center;
+  color: #333;
+  font-size: 18px; /* Bigger text */
+  margin-top: 25px;
+}
+
+/* Links */
+p a {
+  text-decoration: none;
+  color: #ad033cc5;
+  font-weight: bold;
+  font-size: 20px; /* Increased link size */
+  transition: color 0.3s ease-in-out;
+}
+
+p a:hover {
+  color: #ef1443;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .main-content {
+      max-width: 90%;
+      padding: 25px;
+      height: auto;
+  }
+
+  label {
+      font-size: 18px;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+      font-size: 18px;
+      padding: 12px;
+  }
+
+  button[type="submit"] {
+      font-size: 20px;
+      padding: 12px;
+  }
+
+  p {
+      font-size: 16px;
+  }
+
+  p a {
+      font-size: 18px;
+  }
+}

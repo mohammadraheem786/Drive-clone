@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload UI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800 bg-black bg-opacity-50">
+    
+    <!-- Upload Button (Initially Visible) -->
+    <button id="show-upload-form" class="px-5 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-400">
+        📂 Upload File
+    </button>
+
+    <!-- Upload Form (Initially Hidden) -->
+    <div id="upload-section" class="bg-gray-50 p-6 rounded-lg shadow-md w-full max-w-md text-center hidden">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Upload Your File</h2>
+
+        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <!-- File Upload Button -->
+            <div class="relative w-full">
+                <input type="file" id="file-upload" class="hidden" name="file" accept="image/*" onchange="displayFilePreview(event)">
+                <label for="file-upload" class="flex items-center justify-center w-full px-5 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md cursor-pointer hover:bg-blue-600 focus:ring-2 focus:ring-blue-400">
+                    📂 Choose File
+                </label>
+                <p id="upload-file-name" class="mt-2 text-sm text-gray-600 hidden"></p>
+                <img id="upload-preview" class="mt-2 hidden w-24 h-24 object-cover mx-auto rounded-lg shadow-md" alt="File Preview">
+            </div>
+            <br>
+            <button type="submit" class="w-full px-5 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none transition">
+                Submit
+            </button>
+        </form>
+
+        <!-- Display Uploaded Files -->
+        
+    </div>
+    <div class="files mt-3 ml-10 flex flex-col gap-2">
+        <% if (files.length > 0) { %>
+            <% files.forEach((file) => { %>
+                <div class="cursor-pointer rounded-md bg-gray-300 p-2 flex items-center gap-4">
+                    <!-- Display Image -->
+                    <img src="<%= file.file_url %>" alt="Uploaded Image" class="w-24 h-24 object-cover rounded-md shadow-md">
+                    
+                    <!-- Display File URL -->
+                    <h1 class="text-gray-800 break-words"><%= file.file_url %></h1>
+                    <a href="/download?url=<%= encodeURIComponent(file.file_url) %>" class="text-blue-500 hover:underline">
+                        <i class="ri-file-download-line text-2xl"></i>
+                    </a>
+                    
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p class="text-gray-600">No files uploaded yet.</p>
+        <% } %>
+    </div>
+   
+    <script>
+        // Show Upload Form when Button is Clicked
+        document.getElementById("show-upload-form").addEventListener("click", function() {
+            document.getElementById("upload-section").classList.remove("hidden");
+            this.classList.add("hidden"); // Hide the button
+        });
+
+        // Display File Name & Preview
+        function displayFilePreview(event) {
+            const file = event.target.files[0];
+            const fileNameElement = document.getElementById("upload-file-name");
+            const imgElement = document.getElementById("upload-preview");
+
+            if (file) {
+                fileNameElement.textContent = `Selected File: ${file.name}`;
+                
+                fileNameElement.classList.remove("hidden");
+
+                // Check if file is an image
+                if (file.type.startsWith("image/")) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        imgElement.src = e.target.result;
+                        imgElement.classList.remove("hidden");
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    imgElement.classList.add("hidden");
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
